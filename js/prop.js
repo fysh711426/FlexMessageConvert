@@ -1,4 +1,4 @@
-﻿//---------- Prop 轉換器 ----------
+//---------- Prop 轉換器 ----------
 
 function componentDirection(val) {
     this.getResult = function () {

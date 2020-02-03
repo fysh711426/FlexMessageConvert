@@ -1,4 +1,4 @@
-//---------- Function ¦@¥Î¨ç¼Æ ----------
+//---------- Function å…±ç”¨å‡½æ•¸ ----------
 
 function getConvertFunc(type) {
     if (type === "carousel")
@@ -54,10 +54,11 @@ function getActionPropResult(prop, obj, order) {
     var result = "";
     var isFirst = true;
     for (let index in order) {
-        if (typeof obj[index] !== "undefined") {
-            let convertFunc = prop[index];
-            var convert = new convertFunc(obj[index]);
+        if (typeof obj[order[index]] !== "undefined") {
+            let convertFunc = prop[order[index]];
+            var convert = new convertFunc(obj[order[index]]);
             result += (isFirst ? "" : ", ") + convert.getResult();
+            isFirst = false;
         }
     }
     return result;
@@ -73,7 +74,7 @@ function getContentsResult(convertFunc, list) {
 function getActionResult(action) {
     var result = "";
     var convertFunc = getConvertFunc(action.type);
-    var convert = convertFunc(action);
+    var convert = new convertFunc(action);
     result += "Action = " + convert.getResult() + ",\n";
     return result;
 }
@@ -84,4 +85,11 @@ function firstUpperCase(str) {
     });
 }
 
-//---------- Function ¦@¥Î¨ç¼Æ ----------
+function flexMessageConvert(json) {
+    var obj = JSON.parse(json);
+    var convertFunc = getConvertFunc(obj.type);
+    var convert = new convertFunc(obj);
+    return convert.getResult();
+}
+
+//---------- Function å…±ç”¨å‡½æ•¸ ----------

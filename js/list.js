@@ -1,4 +1,4 @@
-//---------- List Âà´«¾¹ ----------
+//---------- List è½‰æ›å™¨ ----------
 
 function iFlexComponentList(list) {
     this.getResult = function () {
@@ -28,4 +28,4 @@ function bubbleContainerList(list) {
     };
 }
 
-//---------- List Âà´«¾¹ ----------
+//---------- List è½‰æ›å™¨ ----------

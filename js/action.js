@@ -1,4 +1,4 @@
-//---------- Action Ваґ«ѕ№ ----------
+//---------- Action иЅ‰жЏ›е™Ё ----------
 
 function postbackTemplateAction(obj) {
     var prop = {
@@ -71,4 +71,4 @@ function dateTimePickerTemplateAction(obj) {
     };
 }
 
-//---------- Action Ваґ«ѕ№ ----------
+//---------- Action иЅ‰жЏ›е™Ё ----------

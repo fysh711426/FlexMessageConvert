@@ -1,4 +1,4 @@
-//---------- Container Âà´«¾¹ ----------
+//---------- Container è½‰æ›å™¨ ----------
 
 function bubbleContainer(obj) {
     var prop = {
@@ -53,4 +53,4 @@ function blockStyle(obj) {
     };
 }
 
-//---------- Container Âà´«¾¹ ----------
+//---------- Container è½‰æ›å™¨ ----------

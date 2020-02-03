@@ -1,4 +1,4 @@
-﻿//---------- Component 轉換器 ----------
+//---------- Component 轉換器 ----------
 
 function boxComponent(obj) {
     var prop = {
@@ -9,13 +9,18 @@ function boxComponent(obj) {
     };
     this.getResult = function () {
         var result = "new BoxComponent\n{\n";
-        result += getPropResult(prop, obj);
+        var inner = getPropResult(prop, obj);
         if (obj.contents) {
-            result += getContentsResult(iFlexComponentList, obj.contents);
+            if (inner !== "") 
+                inner += ",\n";
+            inner += getContentsResult(iFlexComponentList, obj.contents);
         }
         if (obj.action) {
-            result += getActionResult(obj.action);
+            if (inner !== "")
+                inner += ",\n";
+            inner += getActionResult(obj.action);
         }
+        result += inner;
         result += "}";
         return result;
     };
@@ -32,10 +37,13 @@ function buttonComponent(obj) {
     };
     this.getResult = function () {
         var result = "new ButtonComponent\n{\n";
-        result += getPropResult(prop, obj);
+        var inner = getPropResult(prop, obj);
         if (obj.action) {
-            result += getActionResult(obj.action);
+            if (inner !== "") 
+                inner += ",\n";
+            inner += getActionResult(obj.action);
         }
+        result += inner;
         result += "}";
         return result;
     };
@@ -55,10 +63,13 @@ function imageComponent(obj) {
     };
     this.getResult = function () {
         var result = "new ImageComponent\n{\n";
-        result += getPropResult(prop, obj);
+        var inner = getPropResult(prop, obj);
         if (obj.action) {
-            result += getActionResult(obj.action);
+            if (inner !== "") 
+                inner += ",\n";
+            inner += getActionResult(obj.action);
         }
+        result += inner;
         result += "}";
         return result;
     };
@@ -94,10 +105,13 @@ function textComponent(obj) {
     };
     this.getResult = function () {
         var result = "new TextComponent\n{\n";
-        result += getPropResult(prop, obj);
+        var inner = getPropResult(prop, obj);
         if (obj.action) {
-            result += getActionResult(obj.action);
+            if (inner !== "") 
+                inner += ",\n";
+            inner += getActionResult(obj.action);
         }
+        result += inner;
         result += "}";
         return result;
     };
