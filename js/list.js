@@ -1,29 +1,33 @@
 //---------- List 轉換器 ----------
 
-function iFlexComponentList(list) {
+function iFlexComponentList(list, blank) {
     this.getResult = function () {
-        var result = "new List<IFlexComponent>\n{\n";
+        var result = "new List<IFlexComponent>\n" + blank + "{\n";
+        var isFirst = true;
         for (let index in list) {
             let item = list[index];
             var convertFunc = getConvertFunc(item.type);
-            var convert = new convertFunc(item);
-            result += convert.getResult() + ",\n";
+            var convert = new convertFunc(item, blank + "    ");
+            result += (isFirst ? "" : ",\n") + blank + "    " + convert.getResult();
+            isFirst = false;
         }
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function bubbleContainerList(list) {
+function bubbleContainerList(list, blank) {
     this.getResult = function () {
-        var result = "new List<BubbleContainer>\n{\n";
+        var result = "new List<BubbleContainer>\n" + blank + "{\n";
+        var isFirst = true;
         for (let index in list) {
             let item = list[index];
             var convertFunc = getConvertFunc(item.type);
-            var convert = new convertFunc(item);
-            result += convert.getResult() + ",\n";
+            var convert = new convertFunc(item, blank + "    ");
+            result += (isFirst ? "" : ",\n") + blank + "    " + convert.getResult();
+            isFirst = false;
         }
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }

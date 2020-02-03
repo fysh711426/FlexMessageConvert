@@ -1,6 +1,6 @@
 //---------- Component 轉換器 ----------
 
-function boxComponent(obj) {
+function boxComponent(obj, blank) {
     var prop = {
         layout: boxLayout,
         flex: value,
@@ -8,25 +8,25 @@ function boxComponent(obj) {
         margin: spacing
     };
     this.getResult = function () {
-        var result = "new BoxComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new BoxComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.contents) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getContentsResult(iFlexComponentList, obj.contents);
+            inner += getContentsResult(iFlexComponentList, obj.contents, blank);
         }
         if (obj.action) {
             if (inner !== "")
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function buttonComponent(obj) {
+function buttonComponent(obj, blank) {
     var prop = {
         flex: value,
         spacing: spacing,
@@ -36,20 +36,20 @@ function buttonComponent(obj) {
         gravity: gravity
     };
     this.getResult = function () {
-        var result = "new ButtonComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new ButtonComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.action) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function imageComponent(obj) {
+function imageComponent(obj, blank) {
     var prop = {
         url: text,
         flex: value,
@@ -62,20 +62,20 @@ function imageComponent(obj) {
         backgroundColor: text
     };
     this.getResult = function () {
-        var result = "new ImageComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new ImageComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.action) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function iconComponent(obj) {
+function iconComponent(obj, blank) {
     var prop = {
         url: text,
         margin: spacing,
@@ -83,14 +83,14 @@ function iconComponent(obj) {
         aspectRatio: aspectRatio
     };
     this.getResult = function () {
-        var result = "new IconComponent\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new IconComponent\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function textComponent(obj) {
+function textComponent(obj, blank) {
     var prop = {
         text: text,
         flex: value,
@@ -104,35 +104,35 @@ function textComponent(obj) {
         color: text
     };
     this.getResult = function () {
-        var result = "new TextComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new TextComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.action) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function separatorComponent(obj) {
+function separatorComponent(obj, blank) {
     var prop = {
         margin: spacing,
         color: text
     };
     this.getResult = function () {
-        var result = "new SeparatorComponent\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new SeparatorComponent\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
 function fillerComponent(obj) {
     this.getResult = function () {
-        return "new FillerComponent()";
+        return blank + "new FillerComponent()";
     };
 }
 

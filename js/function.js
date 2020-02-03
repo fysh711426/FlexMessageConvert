@@ -31,18 +31,18 @@ function getConvertFunc(type) {
         return dateTimePickerTemplateAction;
 }
 
-function getPropResult(prop, obj) {
+function getPropResult(prop, obj, blank) {
     var result = "";
     var isFirst = true;
     for (let index in obj) {
         if (index !== 'type' && index !== 'contents' && index !== 'action') {
             let convertFunc = prop[index];
             if (convertFunc) {
-                var convert = new convertFunc(obj[index]);
-                result += (isFirst ? "" : ",\n") + firstUpperCase(index) + " = " + convert.getResult();
+                var convert = new convertFunc(obj[index], blank + "    ");
+                result += (isFirst ? "" : ",\n") + blank + "    " + firstUpperCase(index) + " = " + convert.getResult();
             }
             else {
-                result += (isFirst ? "" : ",\n") +firstUpperCase(index) + " = \"" + obj[index] + "\"";
+                result += (isFirst ? "" : ",\n") + blank + "    " + firstUpperCase(index) + " = \"" + obj[index] + "\"";
             }
             isFirst = false;
         }
@@ -50,13 +50,13 @@ function getPropResult(prop, obj) {
     return result;
 }
 
-function getActionPropResult(prop, obj, order) {
+function getActionPropResult(prop, obj, order, blank) {
     var result = "";
     var isFirst = true;
     for (let index in order) {
         if (typeof obj[order[index]] !== "undefined") {
             let convertFunc = prop[order[index]];
-            var convert = new convertFunc(obj[order[index]]);
+            var convert = new convertFunc(obj[order[index]], blank + "    ");
             result += (isFirst ? "" : ", ") + convert.getResult();
             isFirst = false;
         }
@@ -64,18 +64,18 @@ function getActionPropResult(prop, obj, order) {
     return result;
 }
 
-function getContentsResult(convertFunc, list) {
+function getContentsResult(convertFunc, list, blank) {
     var result = "";
-    var convert = new convertFunc(list);
-    result += "Contents = " + convert.getResult() + ",\n";
+    var convert = new convertFunc(list, blank + "    ");
+    result += blank + "    " + "Contents = " + convert.getResult();
     return result;
 }
 
-function getActionResult(action) {
+function getActionResult(action, blank) {
     var result = "";
     var convertFunc = getConvertFunc(action.type);
-    var convert = new convertFunc(action);
-    result += "Action = " + convert.getResult() + ",\n";
+    var convert = new convertFunc(action, blank + "    ");
+    result += blank + "    " + "Action = " + convert.getResult();
     return result;
 }
 
@@ -87,9 +87,12 @@ function firstUpperCase(str) {
 
 function flexMessageConvert(json) {
     var obj = JSON.parse(json);
+    var result = 'new FlexMessage("AltText")\n{\n    Contents = ';
     var convertFunc = getConvertFunc(obj.type);
-    var convert = new convertFunc(obj);
-    return convert.getResult();
+    var convert = new convertFunc(obj, "    ");
+    result += convert.getResult();
+    result += "\n};"
+    return result;
 }
 
 //---------- Function 共用函數 ----------

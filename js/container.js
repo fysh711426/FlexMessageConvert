@@ -1,6 +1,6 @@
 //---------- Container 轉換器 ----------
 
-function bubbleContainer(obj) {
+function bubbleContainer(obj, blank) {
     var prop = {
         direction: componentDirection,
         header: boxComponent,
@@ -10,23 +10,23 @@ function bubbleContainer(obj) {
         styles: bubbleStyles
     };
     this.getResult = function () {
-        var result = "new BubbleContainer\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new BubbleContainer\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function carouselContainer(obj) {
+function carouselContainer(obj, blank) {
     this.getResult = function () {
-        var result = "new CarouselContainer\n{\n";
-        result += getContentsResult(iFlexComponentList, obj.contents);
-        result += "}";
+        var result = "new CarouselContainer\n" + blank + "{\n";
+        result += getContentsResult(iFlexComponentList, obj.contents, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function bubbleStyles(obj) {
+function bubbleStyles(obj, blank) {
     var prop = {
         header: blockStyle,
         hero: blockStyle,
@@ -34,21 +34,21 @@ function bubbleStyles(obj) {
         footer: blockStyle
     };
     this.getResult = function () {
-        var result = "new BubbleStyles\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new BubbleStyles\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function blockStyle(obj) {
+function blockStyle(obj, blank) {
     var prop = {
         separator: value
     };
     this.getResult = function () {
-        var result = "new BlockStyle\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new BlockStyle\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }

@@ -1,6 +1,6 @@
 //---------- Container 轉換器 ----------
 
-function bubbleContainer(obj) {
+function bubbleContainer(obj, blank) {
     var prop = {
         direction: componentDirection,
         header: boxComponent,
@@ -10,23 +10,23 @@ function bubbleContainer(obj) {
         styles: bubbleStyles
     };
     this.getResult = function () {
-        var result = "new BubbleContainer\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new BubbleContainer\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function carouselContainer(obj) {
+function carouselContainer(obj, blank) {
     this.getResult = function () {
-        var result = "new CarouselContainer\n{\n";
-        result += getContentsResult(iFlexComponentList, obj.contents);
-        result += "}";
+        var result = "new CarouselContainer\n" + blank + "{\n";
+        result += getContentsResult(iFlexComponentList, obj.contents, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function bubbleStyles(obj) {
+function bubbleStyles(obj, blank) {
     var prop = {
         header: blockStyle,
         hero: blockStyle,
@@ -34,21 +34,21 @@ function bubbleStyles(obj) {
         footer: blockStyle
     };
     this.getResult = function () {
-        var result = "new BubbleStyles\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new BubbleStyles\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function blockStyle(obj) {
+function blockStyle(obj, blank) {
     var prop = {
         separator: value
     };
     this.getResult = function () {
-        var result = "new BlockStyle\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new BlockStyle\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
@@ -57,7 +57,7 @@ function blockStyle(obj) {
 
 //---------- Component 轉換器 ----------
 
-function boxComponent(obj) {
+function boxComponent(obj, blank) {
     var prop = {
         layout: boxLayout,
         flex: value,
@@ -65,25 +65,25 @@ function boxComponent(obj) {
         margin: spacing
     };
     this.getResult = function () {
-        var result = "new BoxComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new BoxComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.contents) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getContentsResult(iFlexComponentList, obj.contents);
+            inner += getContentsResult(iFlexComponentList, obj.contents, blank);
         }
         if (obj.action) {
             if (inner !== "")
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function buttonComponent(obj) {
+function buttonComponent(obj, blank) {
     var prop = {
         flex: value,
         spacing: spacing,
@@ -93,20 +93,20 @@ function buttonComponent(obj) {
         gravity: gravity
     };
     this.getResult = function () {
-        var result = "new ButtonComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new ButtonComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.action) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function imageComponent(obj) {
+function imageComponent(obj, blank) {
     var prop = {
         url: text,
         flex: value,
@@ -119,20 +119,20 @@ function imageComponent(obj) {
         backgroundColor: text
     };
     this.getResult = function () {
-        var result = "new ImageComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new ImageComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.action) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function iconComponent(obj) {
+function iconComponent(obj, blank) {
     var prop = {
         url: text,
         margin: spacing,
@@ -140,14 +140,14 @@ function iconComponent(obj) {
         aspectRatio: aspectRatio
     };
     this.getResult = function () {
-        var result = "new IconComponent\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new IconComponent\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function textComponent(obj) {
+function textComponent(obj, blank) {
     var prop = {
         text: text,
         flex: value,
@@ -161,35 +161,35 @@ function textComponent(obj) {
         color: text
     };
     this.getResult = function () {
-        var result = "new TextComponent\n{\n";
-        var inner = getPropResult(prop, obj);
+        var result = "new TextComponent\n" + blank + "{\n";
+        var inner = getPropResult(prop, obj, blank);
         if (obj.action) {
             if (inner !== "") 
                 inner += ",\n";
-            inner += getActionResult(obj.action);
+            inner += getActionResult(obj.action, blank);
         }
         result += inner;
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function separatorComponent(obj) {
+function separatorComponent(obj, blank) {
     var prop = {
         margin: spacing,
         color: text
     };
     this.getResult = function () {
-        var result = "new SeparatorComponent\n{\n";
-        result += getPropResult(prop, obj);
-        result += "}";
+        var result = "new SeparatorComponent\n" + blank + "{\n";
+        result += getPropResult(prop, obj, blank);
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
 function fillerComponent(obj) {
     this.getResult = function () {
-        return "new FillerComponent()";
+        return blank + "new FillerComponent()";
     };
 }
 
@@ -197,30 +197,34 @@ function fillerComponent(obj) {
 
 //---------- List 轉換器 ----------
 
-function iFlexComponentList(list) {
+function iFlexComponentList(list, blank) {
     this.getResult = function () {
-        var result = "new List<IFlexComponent>\n{\n";
+        var result = "new List<IFlexComponent>\n" + blank + "{\n";
+        var isFirst = true;
         for (let index in list) {
             let item = list[index];
             var convertFunc = getConvertFunc(item.type);
-            var convert = new convertFunc(item);
-            result += convert.getResult() + ",\n";
+            var convert = new convertFunc(item, blank + "    ");
+            result += (isFirst ? "" : ",\n") + blank + "    " + convert.getResult();
+            isFirst = false;
         }
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
 
-function bubbleContainerList(list) {
+function bubbleContainerList(list, blank) {
     this.getResult = function () {
-        var result = "new List<BubbleContainer>\n{\n";
+        var result = "new List<BubbleContainer>\n" + blank + "{\n";
+        var isFirst = true;
         for (let index in list) {
             let item = list[index];
             var convertFunc = getConvertFunc(item.type);
-            var convert = new convertFunc(item);
-            result += convert.getResult() + ",\n";
+            var convert = new convertFunc(item, blank + "    ");
+            result += (isFirst ? "" : ",\n") + blank + "    " + convert.getResult();
+            isFirst = false;
         }
-        result += "}";
+        result += "\n" + blank + "}";
         return result;
     };
 }
@@ -229,7 +233,7 @@ function bubbleContainerList(list) {
 
 //---------- Action 轉換器 ----------
 
-function postbackTemplateAction(obj) {
+function postbackTemplateAction(obj, blank) {
     var prop = {
         label: text,
         data: text,
@@ -238,13 +242,13 @@ function postbackTemplateAction(obj) {
     var order = ["label", "data", "displayText"];
     this.getResult = function () {
         var result = "new PostbackTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         result += ")";
         return result;
     };
 }
 
-function messageTemplateAction(obj) {
+function messageTemplateAction(obj, blank) {
     var prop = {
         label: text,
         text: text
@@ -252,13 +256,13 @@ function messageTemplateAction(obj) {
     var order = ["label", "data"];
     this.getResult = function () {
         var result = "new MessageTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         result += ")";
         return result;
     };
 }
 
-function uriTemplateAction(obj) {
+function uriTemplateAction(obj, blank) {
     var prop = {
         label: text,
         uri: text,
@@ -267,13 +271,13 @@ function uriTemplateAction(obj) {
     var order = ["label", "data", "altUri"];
     this.getResult = function () {
         var result = "new UriTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         result += ")";
         return result;
     };
 }
 
-function dateTimePickerTemplateAction(obj) {
+function dateTimePickerTemplateAction(obj, blank) {
     var prop = {
         label: text,
         data: text,
@@ -285,7 +289,7 @@ function dateTimePickerTemplateAction(obj) {
     var order = ["label", "data", "mode"];
     this.getResult = function () {
         var result = "new DateTimePickerTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         if (initial) {
             result += ", initial: \"" + obj["initial"] + "\"";
         }
@@ -304,7 +308,7 @@ function dateTimePickerTemplateAction(obj) {
 
 //---------- Prop 轉換器 ----------
 
-function componentDirection(val) {
+function componentDirection(val, blank) {
     this.getResult = function () {
         if (val === "ltr")
             return "ComponentDirection.Ltr";
@@ -314,7 +318,7 @@ function componentDirection(val) {
     };
 }
 
-function boxLayout(val) {
+function boxLayout(val, blank) {
     this.getResult = function () {
         if (val === "horizontal")
             return "BoxLayout.Horizontal";
@@ -326,7 +330,7 @@ function boxLayout(val) {
     };
 }
 
-function spacing(val) {
+function spacing(val, blank) {
     this.getResult = function () {
         if (val === "none")
             return "Spacing.None";
@@ -346,7 +350,7 @@ function spacing(val) {
     };
 }
 
-function gravity(val) {
+function gravity(val, blank) {
     this.getResult = function () {
         if (val === "top")
             return "Gravity.Top";
@@ -358,7 +362,7 @@ function gravity(val) {
     };
 }
 
-function align(val) {
+function align(val, blank) {
     this.getResult = function () {
         if (val === "start")
             return "Align.Start";
@@ -370,7 +374,7 @@ function align(val) {
     };
 }
 
-function aspectRatio(val) {
+function aspectRatio(val, blank) {
     this.getResult = function () {
         if (val === "1:1")
             return "AspectRatio._1_1";
@@ -401,7 +405,7 @@ function aspectRatio(val) {
     };
 }
 
-function aspectMode(val) {
+function aspectMode(val, blank) {
     this.getResult = function () {
         if (val === "cover")
             return "AspectMode.Cover";
@@ -411,7 +415,7 @@ function aspectMode(val) {
     };
 }
 
-function weight(val) {
+function weight(val, blank) {
     this.getResult = function () {
         if (val === "regular")
             return "Weight.Regular";
@@ -421,7 +425,7 @@ function weight(val) {
     };
 }
 
-function buttonHeight(val) {
+function buttonHeight(val, blank) {
     this.getResult = function () {
         if (val === "sm")
             return "ButtonHeight.Sm";
@@ -431,7 +435,7 @@ function buttonHeight(val) {
     };
 }
 
-function buttonStyle(val) {
+function buttonStyle(val, blank) {
     this.getResult = function () {
         if (val === "link")
             return "ButtonStyle.Link";
@@ -443,7 +447,7 @@ function buttonStyle(val) {
     };
 }
 
-function componentSize(val) {
+function componentSize(val, blank) {
     this.getResult = function () {
         if (val === "xxs")
             return "ComponentSize.Xxs";
@@ -471,7 +475,7 @@ function componentSize(val) {
     };
 }
 
-function dateTimePickerMode(val) {
+function dateTimePickerMode(val, blank) {
     this.getResult = function () {
         if (val === "time")
             return "DateTimePickerMode.Time";
@@ -483,19 +487,19 @@ function dateTimePickerMode(val) {
     };
 }
 
-function altUri(val) {
+function altUri(val, blank) {
     this.getResult = function () {
         return "new AltUri(\"" + val + "\")";
     };
 }
 
-function value(val) {
+function value(val, blank) {
     this.getResult = function () {
         return val;
     };
 }
 
-function text(val) {
+function text(val, blank) {
     this.getResult = function () {
         return "\"" + val + "\"";
     };
@@ -536,18 +540,18 @@ function getConvertFunc(type) {
         return dateTimePickerTemplateAction;
 }
 
-function getPropResult(prop, obj) {
+function getPropResult(prop, obj, blank) {
     var result = "";
     var isFirst = true;
     for (let index in obj) {
         if (index !== 'type' && index !== 'contents' && index !== 'action') {
             let convertFunc = prop[index];
             if (convertFunc) {
-                var convert = new convertFunc(obj[index]);
-                result += (isFirst ? "" : ",\n") + firstUpperCase(index) + " = " + convert.getResult();
+                var convert = new convertFunc(obj[index], blank + "    ");
+                result += (isFirst ? "" : ",\n") + blank + "    " + firstUpperCase(index) + " = " + convert.getResult();
             }
             else {
-                result += (isFirst ? "" : ",\n") +firstUpperCase(index) + " = \"" + obj[index] + "\"";
+                result += (isFirst ? "" : ",\n") + blank + "    " + firstUpperCase(index) + " = \"" + obj[index] + "\"";
             }
             isFirst = false;
         }
@@ -555,13 +559,13 @@ function getPropResult(prop, obj) {
     return result;
 }
 
-function getActionPropResult(prop, obj, order) {
+function getActionPropResult(prop, obj, order, blank) {
     var result = "";
     var isFirst = true;
     for (let index in order) {
         if (typeof obj[order[index]] !== "undefined") {
             let convertFunc = prop[order[index]];
-            var convert = new convertFunc(obj[order[index]]);
+            var convert = new convertFunc(obj[order[index]], blank + "    ");
             result += (isFirst ? "" : ", ") + convert.getResult();
             isFirst = false;
         }
@@ -569,18 +573,18 @@ function getActionPropResult(prop, obj, order) {
     return result;
 }
 
-function getContentsResult(convertFunc, list) {
+function getContentsResult(convertFunc, list, blank) {
     var result = "";
-    var convert = new convertFunc(list);
-    result += "Contents = " + convert.getResult() + ",\n";
+    var convert = new convertFunc(list, blank + "    ");
+    result += blank + "    " + "Contents = " + convert.getResult();
     return result;
 }
 
-function getActionResult(action) {
+function getActionResult(action, blank) {
     var result = "";
     var convertFunc = getConvertFunc(action.type);
-    var convert = new convertFunc(action);
-    result += "Action = " + convert.getResult() + ",\n";
+    var convert = new convertFunc(action, blank + "    ");
+    result += blank + "    " + "Action = " + convert.getResult();
     return result;
 }
 
@@ -592,9 +596,12 @@ function firstUpperCase(str) {
 
 function flexMessageConvert(json) {
     var obj = JSON.parse(json);
+    var result = 'new FlexMessage("AltText")\n{\n    Contents = ';
     var convertFunc = getConvertFunc(obj.type);
-    var convert = new convertFunc(obj);
-    return convert.getResult();
+    var convert = new convertFunc(obj, "    ");
+    result += convert.getResult();
+    result += "\n};"
+    return result;
 }
 
 //---------- Function 共用函數 ----------

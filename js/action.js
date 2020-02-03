@@ -1,6 +1,6 @@
 //---------- Action 轉換器 ----------
 
-function postbackTemplateAction(obj) {
+function postbackTemplateAction(obj, blank) {
     var prop = {
         label: text,
         data: text,
@@ -9,13 +9,13 @@ function postbackTemplateAction(obj) {
     var order = ["label", "data", "displayText"];
     this.getResult = function () {
         var result = "new PostbackTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         result += ")";
         return result;
     };
 }
 
-function messageTemplateAction(obj) {
+function messageTemplateAction(obj, blank) {
     var prop = {
         label: text,
         text: text
@@ -23,13 +23,13 @@ function messageTemplateAction(obj) {
     var order = ["label", "data"];
     this.getResult = function () {
         var result = "new MessageTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         result += ")";
         return result;
     };
 }
 
-function uriTemplateAction(obj) {
+function uriTemplateAction(obj, blank) {
     var prop = {
         label: text,
         uri: text,
@@ -38,13 +38,13 @@ function uriTemplateAction(obj) {
     var order = ["label", "data", "altUri"];
     this.getResult = function () {
         var result = "new UriTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         result += ")";
         return result;
     };
 }
 
-function dateTimePickerTemplateAction(obj) {
+function dateTimePickerTemplateAction(obj, blank) {
     var prop = {
         label: text,
         data: text,
@@ -56,7 +56,7 @@ function dateTimePickerTemplateAction(obj) {
     var order = ["label", "data", "mode"];
     this.getResult = function () {
         var result = "new DateTimePickerTemplateAction(";
-        result += getActionPropResult(prop, obj, order);
+        result += getActionPropResult(prop, obj, order, blank);
         if (initial) {
             result += ", initial: \"" + obj["initial"] + "\"";
         }

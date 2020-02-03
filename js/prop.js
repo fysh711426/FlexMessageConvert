@@ -1,6 +1,6 @@
 //---------- Prop 轉換器 ----------
 
-function componentDirection(val) {
+function componentDirection(val, blank) {
     this.getResult = function () {
         if (val === "ltr")
             return "ComponentDirection.Ltr";
@@ -10,7 +10,7 @@ function componentDirection(val) {
     };
 }
 
-function boxLayout(val) {
+function boxLayout(val, blank) {
     this.getResult = function () {
         if (val === "horizontal")
             return "BoxLayout.Horizontal";
@@ -22,7 +22,7 @@ function boxLayout(val) {
     };
 }
 
-function spacing(val) {
+function spacing(val, blank) {
     this.getResult = function () {
         if (val === "none")
             return "Spacing.None";
@@ -42,7 +42,7 @@ function spacing(val) {
     };
 }
 
-function gravity(val) {
+function gravity(val, blank) {
     this.getResult = function () {
         if (val === "top")
             return "Gravity.Top";
@@ -54,7 +54,7 @@ function gravity(val) {
     };
 }
 
-function align(val) {
+function align(val, blank) {
     this.getResult = function () {
         if (val === "start")
             return "Align.Start";
@@ -66,7 +66,7 @@ function align(val) {
     };
 }
 
-function aspectRatio(val) {
+function aspectRatio(val, blank) {
     this.getResult = function () {
         if (val === "1:1")
             return "AspectRatio._1_1";
@@ -97,7 +97,7 @@ function aspectRatio(val) {
     };
 }
 
-function aspectMode(val) {
+function aspectMode(val, blank) {
     this.getResult = function () {
         if (val === "cover")
             return "AspectMode.Cover";
@@ -107,7 +107,7 @@ function aspectMode(val) {
     };
 }
 
-function weight(val) {
+function weight(val, blank) {
     this.getResult = function () {
         if (val === "regular")
             return "Weight.Regular";
@@ -117,7 +117,7 @@ function weight(val) {
     };
 }
 
-function buttonHeight(val) {
+function buttonHeight(val, blank) {
     this.getResult = function () {
         if (val === "sm")
             return "ButtonHeight.Sm";
@@ -127,7 +127,7 @@ function buttonHeight(val) {
     };
 }
 
-function buttonStyle(val) {
+function buttonStyle(val, blank) {
     this.getResult = function () {
         if (val === "link")
             return "ButtonStyle.Link";
@@ -139,7 +139,7 @@ function buttonStyle(val) {
     };
 }
 
-function componentSize(val) {
+function componentSize(val, blank) {
     this.getResult = function () {
         if (val === "xxs")
             return "ComponentSize.Xxs";
@@ -167,7 +167,7 @@ function componentSize(val) {
     };
 }
 
-function dateTimePickerMode(val) {
+function dateTimePickerMode(val, blank) {
     this.getResult = function () {
         if (val === "time")
             return "DateTimePickerMode.Time";
@@ -179,19 +179,19 @@ function dateTimePickerMode(val) {
     };
 }
 
-function altUri(val) {
+function altUri(val, blank) {
     this.getResult = function () {
         return "new AltUri(\"" + val + "\")";
     };
 }
 
-function value(val) {
+function value(val, blank) {
     this.getResult = function () {
         return val;
     };
 }
 
-function text(val) {
+function text(val, blank) {
     this.getResult = function () {
         return "\"" + val + "\"";
     };
