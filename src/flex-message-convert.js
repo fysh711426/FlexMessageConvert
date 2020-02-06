@@ -165,6 +165,11 @@ var flexMessageConvert = (function() {
         this.getResult = function () {
             var result = "new TextComponent\n" + blank + "{\n";
             var inner = getPropResult(prop, obj, blank);
+            if (obj.contents) {
+                if (inner !== "") 
+                    inner += ",\n";
+                inner += getContentsResult(iFlexComponentList, obj.contents, blank);
+            }
             if (obj.action) {
                 if (inner !== "") 
                     inner += ",\n";
@@ -189,9 +194,27 @@ var flexMessageConvert = (function() {
         };
     }
 
-    function fillerComponent(obj) {
+    function spacerComponent(obj, blank) {
+        var prop = {
+            size: componentSize
+        };
         this.getResult = function () {
-            return blank + "new FillerComponent()";
+            var result = "new SpacerComponent\n" + blank + "{\n";
+            result += getPropResult(prop, obj, blank);
+            result += "\n" + blank + "}";
+            return result;
+        };
+    }
+
+    function fillerComponent(obj, blank) {
+        this.getResult = function () {
+            return "new FillerComponent()";
+        };
+    }
+
+    function spanComponent(obj, blank) {
+        this.getResult = function () {
+            return 'new SpanComponent("未支援的元件")';
         };
     }
 
@@ -270,7 +293,7 @@ var flexMessageConvert = (function() {
             uri: text,
             altUri: altUri
         };
-        var order = ["label", "data", "altUri"];
+        var order = ["label", "uri", "altUri"];
         this.getResult = function () {
             var result = "new UriTemplateAction(";
             result += getActionPropResult(prop, obj, order, blank);
@@ -283,10 +306,10 @@ var flexMessageConvert = (function() {
         var prop = {
             label: text,
             data: text,
-            mode: dateTimePickerMode
-            //initial: text,
-            //min: text,
-            //max: text,
+            mode: dateTimePickerMode,
+            initial: text,
+            min: text,
+            max: text,
         };
         var order = ["label", "data", "mode"];
         this.getResult = function () {
@@ -402,8 +425,11 @@ var flexMessageConvert = (function() {
                 return "AspectRatio._1_2";
             if (val === "1:3")
                 return "AspectRatio._1_3";
-            var arr = string.split(":");
-            return "new AspectRatio(" + arr[0] + ", " + arr[1] + ")";
+            if (val.indexOf(":") >= 0) {
+                var arr = val.split(":");
+                return "new AspectRatio(" + arr[0] + ", " + arr[1] + ")";
+            }
+            return "";
         };
     }
 
@@ -503,7 +529,7 @@ var flexMessageConvert = (function() {
 
     function text(val, blank) {
         this.getResult = function () {
-            return "\"" + val + "\"";
+            return "\"" + val.replace("\n", "\\n") + "\"";
         };
     }
 
@@ -526,10 +552,12 @@ var flexMessageConvert = (function() {
             return iconComponent;
         if (type === "text")
             return textComponent;
-        //if (type === "span")
-        //    return spanComponent;
+        if (type === "span")
+            return spanComponent;
         if (type === "separator")
             return separatorComponent;
+        if (type === "spacer")
+            return spacerComponent;
         if (type === "filler")
             return fillerComponent;
         if (type === "postback")
