@@ -1,8 +1,8 @@
-# FlexMessageConverter  
+# FlexMessageConvert  
 
 這是一個 **「Flex Message 轉換器」**，可以將 JSON 結構轉成 C# 程式。  
 
-使用的 C# SDK 是 [LineMessagingApi](https://github.com/pierre3/LineMessagingApi)。  
+使用的 SDK 是 [LineMessagingApi](https://github.com/pierre3/LineMessagingApi)。  
 
 ---  
 
