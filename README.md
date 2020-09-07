@@ -1,35 +1,34 @@
 # FlexMessageConvert  
 
-這是一個 **「Flex Message 轉換器」**，可以將 JSON 結構轉成 C# 程式。  
+這是一個 **「Flex Message 轉換器」**，可以將 JSON 結構轉成 C# 或 PHP 程式。  
 
-使用的 SDK 是 [LineMessagingApi](https://github.com/pierre3/LineMessagingApi)。  
+* C# 使用的 SDK [LineMessagingApi](https://github.com/pierre3/LineMessagingApi)。  
+* PHP 使用的 SDK [line-bot-sdk-php](https://github.com/line/line-bot-sdk-php/)。  
 
 ---  
 
-### 用法  
+### 用法 - C#  
 
 #### 1. 在程式中引用 js 檔案  
 
 ```HTML
-<script src="flex-message-convert.js"></script>
+<script src="flex-message-convert-csharp.js"></script>
 ```
 
-#### 2. 呼叫 flexMessageConvert() 函數  
+#### 2. 呼叫 flexMessageConvertCSharp() 函數  
 
 ```JS
 $(function() { 
     $("#btn").click(function() { 
-        $("#output").val(flexMessageConvert($("#input").val()));
+        $("#output").val(flexMessageConvertCSharp($("#input").val()));
     });
 }); 
 ```
 
----  
-
 ### 線上測試  
 
 **JSFiddle 網址:**  
-[https://jsfiddle.net/cuvyjbt0/2](https://jsfiddle.net/cuvyjbt0/2)  
+[https://jsfiddle.net/hbfwuzc6](https://jsfiddle.net/hbfwuzc6)  
 
 **結果:**  
 
@@ -37,10 +36,29 @@ $(function() {
 
 ---  
 
-### 設計思路  
+### 用法 - PHP  
 
-我照著 Flex Message 結構設計了各種轉換器，他們彼此可以組成一個樹狀結構，每個節點有 **getResult()** 函數，可以傳回該節點和其所有子節點的轉換結果。  
+#### 1. 在程式中引用 js 檔案  
 
-**示意圖:**  
+```HTML
+<script src="flex-message-convert-php.js"></script>
+```
 
-![https://github.com/fysh711426/FlexMessageConvert/blob/master/image/1580970269058.jpg](https://github.com/fysh711426/FlexMessageConvert/blob/master/image/1580970269058.jpg)  
+#### 2. 呼叫 flexMessageConvertPHP() 函數  
+
+```JS
+$(function() { 
+    $("#btn").click(function() { 
+        $("#output").val(flexMessageConvertPHP($("#input").val()));
+    });
+});
+```
+
+### 線上測試  
+
+**JSFiddle 網址:**  
+[https://jsfiddle.net/q95z6t3e](https://jsfiddle.net/q95z6t3e)  
+
+**結果:**  
+
+![https://github.com/fysh711426/FlexMessageConvert/blob/master/image/1599405940919.jpg](https://github.com/fysh711426/FlexMessageConvert/blob/master/image/1599405940919.jpg)  
